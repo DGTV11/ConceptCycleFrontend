@@ -393,7 +393,7 @@ with gr.Blocks(title="ConceptCycle", theme=gr.themes.Ocean()) as client:
                         (
                             ""
                             if not (x := s.get("difficulty"))
-                            else round(float(x) * 100, 2)
+                            else round(((float(x) - 1) / 9) * 100, 2)
                         ),
                         (
                             ""
