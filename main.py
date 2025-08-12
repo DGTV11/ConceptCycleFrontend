@@ -191,7 +191,7 @@ def _extract_ids_from_display_list(sel_list: Optional[List[str]]) -> List[str]:
 # ----------------------------------------------------------------------
 # UI – Gradio Blocks
 # ----------------------------------------------------------------------
-with gr.Blocks(title="Study-Platform Client", theme=gr.themes.Default()) as client:
+with gr.Blocks(title="ConceptCycle", theme=gr.themes.StudyCopilot()) as client:
     # only store dynamic UI state here (last ids). API URL + token come from .env
     cfg_state = gr.State({"last_note_id": None, "last_quiz_id": None})
 
@@ -226,8 +226,8 @@ with gr.Blocks(title="Study-Platform Client", theme=gr.themes.Default()) as clie
         with gr.Row():
             list_notes_btn = gr.Button("Refresh note list", variant="secondary")
             notes_df = gr.Dataframe(
-                headers=["ID", "Name", "Status"],
-                datatype=["str", "str", "str"],
+                headers=["Name", "Status"],
+                datatype=["str", "str"],
                 interactive=False,
                 label="Your notes",
                 wrap=True,
@@ -276,7 +276,7 @@ with gr.Blocks(title="Study-Platform Client", theme=gr.themes.Default()) as clie
         # Refresh notes (notes table + selected_note dropdown)
         def _refresh_notes(_cfg):
             notes = list_notes(API_URL, API_TOKEN)
-            rows = [[n[0], n[1], n[2]] for n in notes]
+            rows = [[n[1], n[2]] for n in notes]
             choices = _format_note_choices(notes)
             selected_val = choices[0] if choices else None
             return rows, gr.update(choices=choices, value=selected_val)
@@ -363,12 +363,8 @@ with gr.Blocks(title="Study-Platform Client", theme=gr.themes.Default()) as clie
 
         concepts_df = gr.Dataframe(
             headers=[
-                "ID",
                 "Name",
                 "Content",
-                "Card ID",
-                "State",
-                "Step",
                 "Stability",
                 "Difficulty",
                 "Due",
@@ -390,12 +386,8 @@ with gr.Blocks(title="Study-Platform Client", theme=gr.themes.Default()) as clie
                 s = c.get("srs_info", {})
                 rows.append(
                     [
-                        c.get("id", ""),
                         c.get("name", ""),
                         c.get("content", ""),
-                        s.get("id", ""),
-                        s.get("state", ""),
-                        s.get("step", ""),
                         s.get("stability", ""),
                         s.get("difficulty", ""),
                         s.get("due", ""),
