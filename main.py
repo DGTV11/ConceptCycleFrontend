@@ -11,6 +11,7 @@ Place a .env file next to this script with:
 The UI no longer exposes settings. API URL and token are loaded from the env at startup.
 """
 import os
+from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
 import gradio as gr
@@ -365,8 +366,8 @@ with gr.Blocks(title="ConceptCycle", theme=gr.themes.Ocean()) as client:
             headers=[
                 "Name",
                 "Content",
-                "Stability",
-                "Difficulty",
+                "Stability (days)",
+                "Difficulty (percentage)",
                 "Due",
                 "Last review",
             ],
@@ -388,10 +389,22 @@ with gr.Blocks(title="ConceptCycle", theme=gr.themes.Ocean()) as client:
                     [
                         c.get("name", ""),
                         c.get("content", ""),
-                        s.get("stability", ""),
-                        s.get("difficulty", ""),
-                        s.get("due", ""),
-                        s.get("last_review", ""),
+                        "" if not (x := s.get("stability")) else round(float(x), 2),
+                        (
+                            ""
+                            if not (x := s.get("difficulty"))
+                            else round(float(x) * 100, 2)
+                        ),
+                        (
+                            ""
+                            if not (x := s.get("due", ""))
+                            else datetime.fromisoformat(x).strftime("%Y-%m-%d")
+                        ),
+                        (
+                            ""
+                            if not (x := s.get("last_review", ""))
+                            else datetime.fromisoformat(x).strftime("%Y-%m-%d")
+                        ),
                     ]
                 )
             return rows
