@@ -606,17 +606,17 @@ with gr.Blocks(title="ConceptCycle", theme=gr.themes.Ocean()) as client:
             outputs=[completed_quiz_df],
         )
 
-    # Footer
-    with gr.Row():
-        gr.Markdown(
-            """
-            **Info:**  
-            • The UI reads API_URL and API_TOKEN from .env at startup.  
-            • API URL & token are not editable from the UI.  
-            • All requests go through the standard `requests` library.  
-            • Errors from the server appear verbatim in the output boxes.
-            """
-        )
+    # # Footer
+    # with gr.Row():
+    #     gr.Markdown(
+    #         """
+    #         **Info:**
+    #         • The UI reads API_URL and API_TOKEN from .env at startup.
+    #         • API URL & token are not editable from the UI.
+    #         • All requests go through the standard `requests` library.
+    #         • Errors from the server appear verbatim in the output boxes.
+    #         """
+    #     )
 
 if __name__ == "__main__":
     client.queue()
