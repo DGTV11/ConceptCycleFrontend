@@ -191,7 +191,7 @@ def _extract_ids_from_display_list(sel_list: Optional[List[str]]) -> List[str]:
 # ----------------------------------------------------------------------
 # UI – Gradio Blocks
 # ----------------------------------------------------------------------
-with gr.Blocks(title="ConceptCycle", theme=gr.themes.StudyCopilot()) as client:
+with gr.Blocks(title="ConceptCycle", theme=gr.themes.Ocean()) as client:
     # only store dynamic UI state here (last ids). API URL + token come from .env
     cfg_state = gr.State({"last_note_id": None, "last_quiz_id": None})
 
