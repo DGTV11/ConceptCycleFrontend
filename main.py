@@ -1,15 +1,4 @@
 #!/usr/bin/env python
-"""
-Gradio client for the ConceptCycle API (dotenv version).
-
-Configuration
--------------
-Place a .env file next to this script with:
-    API_URL=http://localhost:5046
-    API_TOKEN=your_token_here
-
-The UI no longer exposes settings. API URL and token are loaded from the env at startup.
-"""
 import os
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
@@ -620,4 +609,4 @@ with gr.Blocks(title="ConceptCycle", theme=gr.themes.Ocean()) as client:
 
 if __name__ == "__main__":
     client.queue()
-    client.launch(share=False)
+    client.launch(share=False, favicon_path="conceptcycle.jpg")

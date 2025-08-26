@@ -1,5 +1,9 @@
 # ConceptCycle Gradio frontend
 
+![ConceptCycle logo](conceptcycle.jpg)
+
+See backend code at [ConceptCycleBackend](https://github.com/DGTV11/ConceptCycleBackend)
+
 ## Basic deployment
 
 1. Clone repo
